@@ -1,0 +1,85 @@
+body, html{
+    margin: 0;
+    padding: 0;
+}
+/*****************   Styling the header  ****************/
+header{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    /*position: fixed;*/
+    width: 100%;
+    flex: 2 1 200px;
+}
+.title{
+    margin: 1% 2.5%;
+    display: inline;
+    font-family: 'Monoton', cursive;
+    color: rgb(241, 4, 52);    
+    word-spacing: 10px;
+    /*position: fixed;*/
+}
+.container{
+    width: 40%;
+    float: right;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    text-align: right;
+    margin: 1% 0; 
+    color: rgb(253, 77, 112);  
+    /*position: fixed; */
+}
+.search, .search-btn{
+    border-radius: 8px;
+    color: gray;
+    border: lightgray 2px solid;
+    text-align: center;
+}
+                  /************* Style Navigation **************/
+nav{
+    width : 90%;
+    margin: 0 5%;    
+}
+.nav-links{ 
+    display: flex;
+    justify-content: space-around;    
+    height: 4rem;
+    align-items: center;
+    list-style: none;   
+    font-family: 'Girassol', cursive;
+    font-size: larger;
+    background-color: rgb(128, 195, 240);
+    border-radius: 10px;
+}
+.nav-list a{
+    color: rgb(245, 58, 95);
+    text-decoration: none;
+}
+.nav-list a:hover{
+    color: white;
+}
+        /*********** Styling the banners slide show *************/ 
+.carousel{
+    width: 90%;    
+    margin-left: 5%;    
+}
+/***************** Styling Mens Shoes section ***************/
+section{
+    width: 90%;
+    margin: 0 5%;
+    background-image:  url(http://thewowstyle.com/wp-content/uploads/2015/02/Beautiful-Wallpapers-14.jpg);
+    z-index: -2;
+    opacity: 0.8;       
+}
+h2{
+    text-align: center;
+    color: white;
+    padding-top: 4%;
+}
+.mens-container{
+    background-color: rgba(0, 0, 0, 0.5);
+    
+}
+
+
