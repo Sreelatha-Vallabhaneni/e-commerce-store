@@ -18,11 +18,6 @@ bannerThree.src = "images/banner3.jpg";
 // create Mens Shoes functionality
 const h2Mens = document.querySelector('.mens-shoes');
 h2Mens.textContent = 'Mens Shoes';
-// all buttons
-/*const btn1 = document.querySelector('.btn1');
-const btn2 = document.querySelector(".btn2");
-const btn3 = document.querySelector(".btn3");
-const btn4 = document.querySelector(".btn4");*/
 const mensDisProducts = document.querySelector(".mens-display-products");
 const mensDisButtons = document.querySelector('.mens-display-buttons');
 // Create class for Product
@@ -91,70 +86,30 @@ class DisplayProducts{
     this.products = products;
   }
   //render Display products in landing page
-  renderDisplayProducts() {
-    
+  renderDisplayProducts() {    
     this.products.forEach(product => {      
       const repeatImage = document.createElement("image");
       repeatImage.innerHTML = `<img class="disp-images" src=${product.images}>`;
       mensDisProducts.appendChild(repeatImage);
-      
-
-      /*const repeatButton = document.createElement("button");
-      repeatButton.innerHTML = `<button type="button" class="btn btn-warning">${buttonName}</button>`;
-      mensDisProductsUl.appendChild(repeatButton);*/
-      //create event listener
-      
-    /*getDisplayProducts(product.image,'nikeBtn', 'Nike');
-    getDisplayProducts(product.image, 'sneakerBtn', 'Sneaker');
-    getDisplayProducts(product.image, 'trekkingBtn', 'Trekking Shoes');
-    getDisplayProducts(product.image, 'winterBtn', 'Winter Shoes');*/
     })
     createButton("Shop Now", mensDisButtons, "Nike");
     createButton("Shop Now", mensDisButtons, "Sneaker");
     createButton("Shop Now", mensDisButtons, "Trekking Shoes");
     createButton("Shop Now", mensDisButtons, "Winter Shoes");
-    /*const mensDisProductsUl = document.querySelector(".mens-display-products");
-    this.products.forEach(product => {
-      const disProductNike = document.querySelector("nike-img");
-      const disProductsneaker = document.querySelector("sneaker-img");
-      const disProductTrekking = document.querySelector("trekking-img");
-      const disProductWinter = document.querySelector("winter-img");
-      disProductLi.innerHTML = `<img src= ${product.images}><br>`; 
-      //const dispButtons = document.createElement('button');
-      //dispButtons.innerHTML = `<button type="button" class="btn btn-warning" id="${product.id}">${product.name+"Shop Now"}</button>`;                 mensDisProductsUl.appendChild(dispButtons); 
-      //mensDisProductsUl.appendChild(disProductLi);
-    });*/
   }
   /* <li><button type="button" class="btn btn-warning" id="${product.id}">${product.name+"Shop Now"}</button></li>
    <li><p class="sampleid">${product.name}</p></li>*/
-  // render single Product
 }
-/*function getDisplayImages(name){
-  name.innerHTML = `<img src= ${product.images}><br>`;
-}*/
-//function getDisplayProducts(imageName, buttonName, name){}
-
 function createButton(text, parent, name){
   const myBtn = document.createElement('button');
   myBtn.innerHTML = `<button type="button" class="btn btn-warning">${text}</button>`;
   parent.appendChild(myBtn);
+  //Event listener functionality for button click -  Open Modal Popup & render single product
   myBtn.addEventListener("click", () => {
-    document.querySelector(".bg-modal").style.display = "flex";
+    document.querySelector(".bg-modal").style.display = "flex"; //to open Modal Box/POPUP
     shoppingCart.renderSingleProduct(name);
   });
 }
-
-
-//Modal Box/POPUP Functionality
-/*document.addEventListener("click", (event) => {
-    if (event.target.classList.contains("btn")) {
-      document.querySelector(".bg-modal").style.display = "flex";
-      shoppingCart.renderSingleProduct();         
-    }
-  },
-  false
-);*/
-
 // mens all products
 const nikeProduct = new Product("Nike", 1000, 1, "Dark Grey", "42In", "images/mens1.jpg", []);
 const sneakerProduct = new Product("Sneaker", 2000, 2, "Black", "40In", "images/mens2.jpg", []);
@@ -168,31 +123,14 @@ sneakerProduct.addImages("images/mens2-b.jpg");
 trekkingShoesProduct.addImages("images/mens3-a.jpg");
 winterShoesProduct.addImages("images/mens4-a.jpg");
 winterShoesProduct.addImages("images/mens4-b.jpg");
-
+// store products in array
 const shoppingCart = new ShoppingCart([nikeProduct, sneakerProduct, trekkingShoesProduct, winterShoesProduct]);
 const displayProducts = new DisplayProducts([sneakerProduct, nikeProduct, trekkingShoesProduct, winterShoesProduct]);
 displayProducts.renderDisplayProducts();
-
-//Event listener functionality for button click -  Open Modal Popup & render single product
-
-  /*shoppingCart.renderSingleProduct("Nike");
-  shoppingCart.renderSingleProduct("Sneaker");
-  shoppingCart.renderSingleProduct("Trekking Shoes");
-  shoppingCart.renderSingleProduct("Winter Shoes");*/
-/*function eventListener(name) {
-  addEventListener("click", () => {
-    document.querySelector(".bg-modal").style.display = "flex";
-    shoppingCart.renderSingleProduct(name);
-  });
-}*/
-/*eventListener(btn1, "Nike");
-eventListener(btn2, "Sneaker");
-eventListener(btn3, "Trekking Shoes");
-eventListener(btn4, "Winter Shoes");*/
-   // Event listener functionality for close Modal Popup
-   document.querySelector(".close").addEventListener("click", () => {
-     document.querySelector(".bg-modal").style.display = "none";
-     location.reload();
-   });
+// Event listener functionality for close Modal Popup
+document.querySelector(".close").addEventListener("click", () => {
+  document.querySelector(".bg-modal").style.display = "none";
+  location.reload();
+});
 
 

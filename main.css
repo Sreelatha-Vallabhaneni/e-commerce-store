@@ -102,17 +102,6 @@ h2{
     transform: rotatey(180deg); /* rotate image y-axis at 180 degrees----its standard syntax */
     transition: width 2s, height 2s, transform 1.5s; /* adds transition effect to the transformation */
 }
-/*.displayProductsList{
-    text-align: center;
-    margin: 2% 0;
-    list-style: none;
-}
-.dispro-img-price{
-    color: white;
-    padding: 8% 0;
-    font-size: 20px;  
-    text-align: center; 
-}*/
 .mens-display-buttons{
     margin-top: 30px;
     display: flex;
@@ -186,11 +175,4 @@ button{
     margin-top: 5px;
     color: antiquewhite;
 }                           /*****End Modal box*******/
-/*.btn{
-    margin: 0 10px;
-    position: sticky;
-}
-.btn-images{
-    display: flex;
-    justify-content: space-around;
-}*/
+
