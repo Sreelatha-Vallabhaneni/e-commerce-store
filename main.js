@@ -20,9 +20,22 @@ const h2Mens = document.querySelector('.mens-shoes');
 h2Mens.textContent = 'Mens Shoes';
 const mensDisProducts = document.querySelector(".mens-display-products");
 const mensDisButtons = document.querySelector('.mens-display-buttons');
+const productName = document.querySelector(".product-name");
+const bigImg = document.querySelector(".big-image");
+const imagesdiv = document.querySelector(".subimg-one");
+const imagesdiv2 = document.querySelector(".subimg-two");
+const colorsList = document.querySelector(".colors-list");
+const sizeList = document.querySelector(".size-list");
+const productPrice = document.querySelector(".product-price");
+//search
+const openSearch = document.querySelector('.open-search-box');
+const search = document.querySelector('.search');
+const searchBtn = document.querySelector('.search-btn');
+const searchModal =document.querySelector('.search-modal');
+const searchMContent = document.querySelector(".search-m-content");
 // Create class for Product
 class Product{
-    constructor(name, price, id, color, size, image, subImages = [], defaultImage){
+    constructor(name, price, id, color = [], size = [], image, subImages = [], defaultImage){
         this.name = name;
         this.price = price;
         this.id = id;
@@ -33,10 +46,14 @@ class Product{
         this.defaultImage = defaultImage
     }
     addImages(subImages){
+      //if(this.subImages.length < 2)
         return this.subImages.push(subImages);
     }
-    addDefaultImage(defaultImage){
-        return this.subImages.push(defaultImage);
+    addColor(color){
+        return this.color.push(color);
+    }
+    addSize(size){
+      return this.size.push(size);
     }
 }
 // Create class for ShoppingCart
@@ -52,6 +69,7 @@ class ShoppingCart {
     const removeProduct = this.products.splice(productIndex, 1);
     return removeProduct;
   }
+
   getTotal() {
     const total = this.products.reduce(
       (sum, product) => (sum += product.price),
@@ -64,38 +82,134 @@ class ShoppingCart {
   renderSingleProduct(name) {
     this.products
       .filter(product => name === product.name)
-      .map(product =>{        
-        if(product.defaultImage){ 
-          const imagesUl = document.querySelector(".images-list");
-          const imagesLi = document.createElement("li");
-          imagesUl.appendChild(imagesLi);         
-          imagesLi.innerHTML = `<div class="images-li"><img src=${product.defaultImage}></div>`;
+      .map(product => {
+        bigImg.src = `${product.images}`;
+        imagesdiv.src = product.subImages[0];
+        imagesdiv2.src = product.subImages[1];
+        function subImagesEventListener(item) {
+          item.addEventListener("mouseover", () => {
+            bigImg.src = item.src;
+          });
+          item.addEventListener("mouseout", () => {
+            bigImg.src = product.images;
+          });
         }
-        product.subImages.forEach(subImage => {
-          const imagesLi = document.createElement("li");
-          imagesLi.innerHTML = `<div class="images-li"><img src=${subImage}></div>`;
-          const imagesUl = document.querySelector(".images-list");
-          imagesUl.appendChild(imagesLi);          
-        })      
-    });
-  } 
+        subImagesEventListener(imagesdiv);
+        subImagesEventListener(imagesdiv2);
+
+        productPrice.textContent = product.price + " DKK";
+        productName.textContent = product.name;
+        // Dropdown list to select shoe color
+
+        product.color.forEach(clr => {
+          const color = document.createElement("option");
+          color.innerHTML = `<option value="${clr}">${clr}</option>`;
+          colorsList.appendChild(color);
+        });
+        // Dropdown list to select shoe size
+
+        product.size.forEach(size => {
+          const shoeSize = document.createElement("option");
+          shoeSize.textContent = size;
+          sizeList.appendChild(shoeSize);
+        });
+      });
+  }
+  searchProduct() {
+    searchBtn.addEventListener("click", () => {      
+      this.products
+        .filter(product => search.value.toLowerCase().trim().includes(product.name.toLowerCase().trim()))
+        .map(product => {
+          document.querySelector(".bg-modal").style.display = "flex";
+          this.renderSingleProduct(product.name);
+          search.value = "";          
+        });
+      });
+  }
 }
+/*document.querySelector(".btn-danger").addEventListener("click", () => {
+  shoppingCart.removeProduct(product);
+});*/
 // Create class for Display Products
-class DisplayProducts{
-  constructor(products){
+class DisplayProducts {
+  constructor(products) {
     this.products = products;
   }
   //render Display products in landing page
-  renderDisplayProducts() {    
-    this.products.forEach(product => {      
+  renderDisplayProducts() {
+    this.products.forEach(product => {
       const repeatImage = document.createElement("image");
       repeatImage.innerHTML = `<img class="disp-images" src=${product.images}>`;
       mensDisProducts.appendChild(repeatImage);
-    })
-    createButton("Shop Now", mensDisButtons, "Nike");
-    createButton("Shop Now", mensDisButtons, "Sneaker");
-    createButton("Shop Now", mensDisButtons, "Trekking Shoes");
-    createButton("Shop Now", mensDisButtons, "Winter Shoes");
+    });
+    createButton("Shop Nike", mensDisButtons, "Nike");
+    createButton("Shop Sneaker", mensDisButtons, "Sneaker");
+    createButton("Shop TrekkingShoes", mensDisButtons, "Trekking Shoes");
+    createButton("Shop WinterShoes", mensDisButtons, "Winter Shoes");
+  }
+  renderCart() {
+    let cartPrices = [];
+    //let productArr = [];
+    this.products.map(product => cartPrices.push(product.price));    
+    const addtoCartBtn = document.querySelector(".btn-primary");
+    const cartItem = document.querySelector(".cart-item-ul");
+    //eventlistener to Add to cart button
+    addtoCartBtn.addEventListener("click", () => {
+      document.querySelector(".bg-modal-two").style.display = "flex";
+      document.querySelector(".bg-modal").style.display = "none";
+      this.products.map(product => { 
+        //productArr.push(product); 
+        //console.log(productArr);      
+        if (product.name === productName.textContent) {
+          const cartImage = document.createElement("image");
+          cartItem.appendChild(cartImage);
+          cartImage.innerHTML = `<div><img class="cart-image" src="${product.images}"></div>`;
+          //const cartQuantity = document.querySelector(".quantity");
+          const cartPrice = document.createElement("p");
+          cartPrice.className = "p-cartPrice"; 
+          cartItem.appendChild(cartPrice);
+          cartPrice.textContent = product.price;
+          cartPrices.push(product.price);
+          console.log(cartPrices);
+          //console.log(cartPrices.slice(4));
+          const total = cartPrices.slice(4).reduce((sum, product) => (sum += product), 0);
+          const sum = document.querySelector(".total");
+          sum.textContent = `TOTAL ${total}`;
+          //console.log(total); 
+          //delete product functionality 
+          const dbtn = document.createElement('button');
+          cartItem.appendChild(dbtn);   
+          dbtn.innerHTML = `<button class="btn btn-danger">Delete</button><br>`;
+         
+          dbtn.addEventListener("click", () => {
+        const cartProductImage = document.querySelector(".cart-image");
+        //if(cartProductImage.src === product.images){
+          cartPrices.slice(4).filter(price => {
+            //console.log();
+           if (delete cartPrices[-1]) {
+             console.log(cartPrices.length[-1]);
+             //cartPrices.slice(4).splice(price, 1);
+              cartPrice.remove();
+           }
+          })
+
+        //cartPrice.remove();
+         // }
+        //console.log(cartProductImage.src, product.images);
+/*const pCartPrice = document.querySelector('.p-cartPrice')
+        if (pCartPrice.textContent === cartPrices) {
+          const matchedIndex = cartPrices
+            .slice(4)
+            .indexOf(pCartPrice.textContent);
+          if (matchedIndex > -1) {
+            return cartPrices.slice(4).slice(matchedIndex, 1);
+          }
+        }*/
+        console.log(cartPrices);
+      }); 
+        }
+      });                 
+    });    
   }
   /* <li><button type="button" class="btn btn-warning" id="${product.id}">${product.name+"Shop Now"}</button></li>
    <li><p class="sampleid">${product.name}</p></li>*/
@@ -111,10 +225,29 @@ function createButton(text, parent, name){
   });
 }
 // mens all products
-const nikeProduct = new Product("Nike", 1000, 1, "Dark Grey", "42In", "images/mens1.jpg", []);
-const sneakerProduct = new Product("Sneaker", 2000, 2, "Black", "40In", "images/mens2.jpg", []);
-const trekkingShoesProduct = new Product("Trekking Shoes", 3000, 3, "Grey", "41In", "images/mens3.jpg", [],'images/default-image.jpg' );
-const winterShoesProduct = new Product("Winter Shoes", 4000, 4, "Brown", "42In", "images/mens4.jpg", []);
+const nikeProduct = new Product("Nike", 150, 1, [], [], "images/mens1.jpg", []);
+const sneakerProduct = new Product("Sneaker", 270, 2, [], [], "images/mens2.jpg", []);
+const trekkingShoesProduct = new Product("Trekking Shoes", 300, 3, [], [], "images/mens3.jpg", [],'images/default-image.jpg' );
+const winterShoesProduct = new Product("Winter Shoes", 4500, 4, [], [], "images/mens4.jpg", []);
+// Each product Colors
+nikeProduct.addColor('Gray');
+nikeProduct.addColor("black");
+nikeProduct.addColor("white");
+sneakerProduct.addColor('red');
+sneakerProduct.addColor('black');
+trekkingShoesProduct.addColor('Dark grey');
+trekkingShoesProduct.addColor('white');
+winterShoesProduct.addColor('brown');
+winterShoesProduct.addColor('dark brown');
+// Each product sizes
+nikeProduct.addSize("EU 40");
+nikeProduct.addSize("EU 39");
+sneakerProduct.addSize("EU 42");
+sneakerProduct.addSize("EU 40");
+trekkingShoesProduct.addSize("EU 38");
+trekkingShoesProduct.addSize("EU 42");
+winterShoesProduct.addSize("EU 40");
+winterShoesProduct.addSize("EU 42");
 //Each product subImages
 nikeProduct.addImages("images/mens1-a.jpg");
 nikeProduct.addImages("images/mens1-b.jpg");
@@ -125,12 +258,17 @@ winterShoesProduct.addImages("images/mens4-a.jpg");
 winterShoesProduct.addImages("images/mens4-b.jpg");
 // store products in array
 const shoppingCart = new ShoppingCart([nikeProduct, sneakerProduct, trekkingShoesProduct, winterShoesProduct]);
-const displayProducts = new DisplayProducts([sneakerProduct, nikeProduct, trekkingShoesProduct, winterShoesProduct]);
+const displayProducts = new DisplayProducts([nikeProduct, sneakerProduct, trekkingShoesProduct, winterShoesProduct]);
 displayProducts.renderDisplayProducts();
-// Event listener functionality for close Modal Popup
+displayProducts.renderCart();
+shoppingCart.searchProduct();
+
+// Event listener functionality to close Modal Popup
 document.querySelector(".close").addEventListener("click", () => {
   document.querySelector(".bg-modal").style.display = "none";
-  location.reload();
+  //location.reload();
 });
 
-
+document.querySelector(".close-two").addEventListener("click", () => {
+  document.querySelector(".bg-modal-two").style.display = "none";
+});

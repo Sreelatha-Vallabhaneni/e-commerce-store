@@ -20,19 +20,19 @@
     <header>
         <h1 class="title"></h1>
         <div class="container">
-            <div>
-                <input type="text" class="search" placeholder="Search Product">
-                <button class="search-btn" type="submit"><i class="fas fa-search"></i></button>
+            <div class="complete-search">
+                <input type="text" class="search" placeholder="Search Product">                
+                <button class="search-btn" type="submit"><i class="fas fa-search"></i></button>                
             </div>
-            <i class="fas fa-cart-arrow-down fa-2x"></i>
+            <a href=""><i class="fas fa-cart-arrow-down fa-2x"></i></a>
             <i class="fas fa-map-marker-alt fa-2x"></i>
-        </div>        
-    </header>
+        </div>    
+    </header>       
     <!--Navigation part-->
     <nav>
         <b>
             <ul class="nav-links">
-                <li class="mens nav-list"></li>
+                <li class="mens nav-list"><a href="#mensShoes"></a></li>
                 <li class="womens nav-list"></li>
                 <li class="kids nav-list"></li>
             </ul>
@@ -67,23 +67,65 @@
         <div class="mens-container">
             <h2 class="mens-shoes"></h2>
             <!--<div class="btns-images">-->
-            <div class="mens-display-products"></div>
+            <div class="mens-display-products" id="mensShoes"></div>
             <div class="mens-display-buttons"></div>            
-        </div>        
+        </div>
+        <footer>
+            <p class="copyright">Copyright ©2019<br> SV Shoes by Sreelatha Vallabhaneni All rights reserved.</p>
+        </footer>
     </section>
     <div class="bg-modal">
         <div class="modal-content">
             <!--&times; is the preferred HTML entity for close icons, rather than the letter "x"-->
             <div class="close">&times;</div>
-            <ul class="images-list"></ul>           
+            <!--<div class="images-list"></div>-->
+            <img class="subimg-one" src="">
+            <img class="subimg-two" src="">
+           <div class="big-sub-image">
+                <img class="big-image" src="">
+            </div>         
+            <!--Dropdown lists for color and size-->
+            <form class="product-info" id="form" action= "/" method="GET">
+                <b><p class="product-price"></p></b>
+                <b><p class="product-name" id="search-name"></p></b>
+                <label for="color"><b>Color:<span>*</span></b></label>
+                <select class="colors-list" name="">
+                    <option value="">Select Color</option>
+                </select>
+                <label for="size"><b>Size:<span>*</span></b></label>
+                <select class="size-list" name="" >
+                    <option value="">Select Size</option>
+                </select>
+                <!--<label for="quantity"><b>Quantity:<span>*</span></b></label>
+                <input class="quantity" type="number" min="0" max="10">                
+                 Button trigger modal -->
+                <!--<button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalLong">
+                    Add to Cart
+                </button>-->                
+            </form>
+            <button type="submit" class="btn btn-primary">ADD to Cart</button>
+        </div>
+    </div>
+    <div class="bg-modal-two">
+        <div class="modal-content-two" id="cart-window">
+            <div class="close-two">&times;</div>
+            <div class="cart-item">
+                <p class="total"></p>
+                <ul class="cart-item-ul"></ul><br>
+                               
+            </div>            
         </div>
     </div>
     
     
+    
+    
+    
+    
+    
 
 
-    <ul class=""></ul>
-    <p class="total"></p>
+    
     <!--Bootstrap 4 jquery, popper links-->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
