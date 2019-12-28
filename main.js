@@ -272,3 +272,4 @@ document.querySelector(".close").addEventListener("click", () => {
 document.querySelector(".close-two").addEventListener("click", () => {
   document.querySelector(".bg-modal-two").style.display = "none";
 });
+<img onerror='this.src="broken_image.png"' src="default-image.jpg"/>
