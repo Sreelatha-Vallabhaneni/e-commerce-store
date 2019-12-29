@@ -1,6 +1,46 @@
 // create heading
 const h1 = document.querySelector('.title');
 h1.textContent = 'SV Shoes';
+//render google map for store location
+/*const getLocation = () => {
+    if(navigator.geolocation){
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        pStatus.textContent = "Geolocation is not supported by this browser.";
+    }
+}
+function showPosition(position){
+    const lat = position.coords.latitude;
+    const lng = position.coords.longitude;*/
+//}
+function renderLocationOnGoogleMap(lat, lng) {
+  const location = document.querySelector(".fa-map-marker-alt");
+  const mapDiv = document.getElementById("map");
+  location.addEventListener('click', () => {
+    document.querySelector(".map-modal").style.display = "flex";
+  const map = new google.maps.Map(mapDiv, {
+    center: { lat, lng },
+    zoom: 10
+  });
+ const marker = new google.maps.Marker({
+    position: { lat, lng },
+    map: map,
+    label: {
+      color: "darkblue",
+      fontWeight: "bold",
+      fontSize: "24px",
+      text: "SV Shoes"
+    }
+  });
+  console.log(map);
+  console.log(marker);
+});
+}
+//getLocation();
+renderLocationOnGoogleMap(55.654307800000005, 12.271277699999999);
+
+
+
 // create navigation links
 const mensLi =  document.querySelector('.mens');
 mensLi.innerHTML = `<a href= "#">Mens Shoes</a>`;
@@ -266,10 +306,11 @@ shoppingCart.searchProduct();
 // Event listener functionality to close Modal Popup
 document.querySelector(".close").addEventListener("click", () => {
   document.querySelector(".bg-modal").style.display = "none";
+  document.querySelector(".map-modal").style.display = "none";
   //location.reload();
 });
 
 document.querySelector(".close-two").addEventListener("click", () => {
   document.querySelector(".bg-modal-two").style.display = "none";
 });
-<img onerror='this.src="broken_image.png"' src="default-image.jpg"/>
+//<img onerror='this.src="broken_image.png"' src="default-image.jpg"/>
