@@ -93,7 +93,6 @@ h2, footer{
     margin-top: 60px;
 }
 .disp-images{
-    margin: 0 0 0 20px;
     width: 200px;
     border-radius: 10px;
     border: rgb(51, 50, 50) 4px solid;
@@ -396,5 +395,8 @@ button{
     }
     .product-info{
         margin-left: 35rem;
+    }
+    .disp-images{
+        margin-left: 5rem;
     }       
 }
