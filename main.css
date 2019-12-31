@@ -153,6 +153,7 @@ button{
 .map-content, .modal-content, .modal-content-two{
     width: 80%;
     height: 80%;
+    overflow: scroll;
     background-color: white;
     position: relative;
     -webkit-animation-name: animatetop;
@@ -169,15 +170,15 @@ button{
   from {top:-300px; opacity:0}
   to {top:0; opacity:1}
 }
-.close, .close-two{
+.close-map, .close, .close-two{
     position: absolute;
     top: 0;
     right: 14px;
     font-size: 42px;    
     cursor: pointer;
-    color: red;
+    color: rgb(55, 10, 252);
 }
-.close:hover, .close-two:hover{
+.close-map:hover, .close:hover, .close-two:hover{
     background-color: rgb(241, 4, 52);
     margin-top: 5px;
     color: antiquewhite;
@@ -234,29 +235,55 @@ button{
     margin: 6rem 0 0 45.8rem;
 }
 /******************* style cart page *******************/
+.cart-count{
+    background-color: crimson;
+    color: white;
+    width: 25px;
+    text-align: center;
+    border-radius: 50%;
+    font-weight: bold;
+    position: absolute;
+    margin: 12px 0 0 115px;
+}
 .cart-image{
     width: 100px;
-    margin-top: 10px;
+    height: 100px;
+    margin-top: 18px;    
 }
-/*.cart-item p{
-    float: right;
-    margin: 0 10px;   
-}*/
-.cart-item-ul{
-   /* flex-direction: column;
+.cart-product, .cart-price, .delete-btn, .cart-quantity{
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;*/
-    display: inline-block;
+    justify-content: space-around;
+    flex-direction: column; 
+    text-align: center;
+}
+.cart-product{
+    margin-top: 21px;
+}
+/*.cart-quantity input{
     width: 50%;
-    align-items: center;
-    box-sizing: border-box;
-    overflow: scroll;
+    text-align: center;
+    margin-left: 5rem;
+}*/
+.cart-item{   
+    margin: 10px; 
+    display: flex;
+    justify-content: space-around;
+    font-size: 20px;
+    flex-wrap: wrap; 
+    color: navy;      
+}
+.total{
+    display: inline-block;
+    margin: 2rem 3rem 0.5rem 5rem ;
+    text-align: center;
+    font-size: 28px;
     color: crimson;
     font-weight: bold;
-    font-size: 15px;
-    border: solid 1px gray;
 }
+.btn-success{
+    float: right;
+    margin: 3rem 10rem 0.5rem 5rem ;
+} 
 .copyright{
     background-color:rgba(0, 0, 0, 0.7);
     font-size: small;
@@ -349,4 +376,5 @@ button{
         margin: 220px 0 0 30%;
         width: 40%;
     }
+       
 }

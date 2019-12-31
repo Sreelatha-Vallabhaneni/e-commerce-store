@@ -67,6 +67,7 @@ const imagesdiv2 = document.querySelector(".subimg-two");
 const colorsList = document.querySelector(".colors-list");
 const sizeList = document.querySelector(".size-list");
 const productPrice = document.querySelector(".product-price");
+const cartCount = document.querySelector(".cart-count");
 //search
 const openSearch = document.querySelector('.open-search-box');
 const search = document.querySelector('.search');
@@ -126,6 +127,7 @@ class ShoppingCart {
         bigImg.src = `${product.images}`;
         imagesdiv.src = product.subImages[0];
         imagesdiv2.src = product.subImages[1];
+        // mouseover and mouseout functionality to sub images
         function subImagesEventListener(item) {
           item.addEventListener("mouseover", () => {
             bigImg.src = item.src;
@@ -136,24 +138,21 @@ class ShoppingCart {
         }
         subImagesEventListener(imagesdiv);
         subImagesEventListener(imagesdiv2);
-
         productPrice.textContent = product.price + " DKK";
         productName.textContent = product.name;
         // Dropdown list to select shoe color
-
         product.color.forEach(clr => {
           const color = document.createElement("option");
           color.innerHTML = `<option value="${clr}">${clr}</option>`;
           colorsList.appendChild(color);
-        });
+        });             
         // Dropdown list to select shoe size
-
         product.size.forEach(size => {
           const shoeSize = document.createElement("option");
           shoeSize.textContent = size;
           sizeList.appendChild(shoeSize);
         });
-      });
+      });      
   }
   searchProduct() {
     searchBtn.addEventListener("click", () => {      
@@ -167,9 +166,7 @@ class ShoppingCart {
       });
   }
 }
-/*document.querySelector(".btn-danger").addEventListener("click", () => {
-  shoppingCart.removeProduct(product);
-});*/
+
 // Create class for Display Products
 class DisplayProducts {
   constructor(products) {
@@ -189,67 +186,74 @@ class DisplayProducts {
   }
   renderCart() {
     let cartPrices = [];
-    //let productArr = [];
-    this.products.map(product => cartPrices.push(product.price));    
+    //this.products.map(product => cartPrices.push(product.price));    
     const addtoCartBtn = document.querySelector(".btn-primary");
-    const cartItem = document.querySelector(".cart-item-ul");
+    const cartProduct = document.querySelector(".cart-product");
     //eventlistener to Add to cart button
     addtoCartBtn.addEventListener("click", () => {
       document.querySelector(".bg-modal-two").style.display = "flex";
       document.querySelector(".bg-modal").style.display = "none";
-      this.products.map(product => { 
-        //productArr.push(product); 
-        //console.log(productArr);      
-        if (product.name === productName.textContent) {
-          const cartImage = document.createElement("image");
-          cartItem.appendChild(cartImage);
-          cartImage.innerHTML = `<div><img class="cart-image" src="${product.images}"></div>`;
-          //const cartQuantity = document.querySelector(".quantity");
-          const cartPrice = document.createElement("p");
-          cartPrice.className = "p-cartPrice"; 
-          cartItem.appendChild(cartPrice);
-          cartPrice.textContent = product.price;
-          cartPrices.push(product.price);
-          console.log(cartPrices);
-          //console.log(cartPrices.slice(4));
-          const total = cartPrices.slice(4).reduce((sum, product) => (sum += product), 0);
-          const sum = document.querySelector(".total");
-          sum.textContent = `TOTAL ${total}`;
-          //console.log(total); 
-          //delete product functionality 
-          const dbtn = document.createElement('button');
-          cartItem.appendChild(dbtn);   
-          dbtn.innerHTML = `<button class="btn btn-danger">Delete</button><br>`;
-         
-          dbtn.addEventListener("click", () => {
-        const cartProductImage = document.querySelector(".cart-image");
-        //if(cartProductImage.src === product.images){
-          cartPrices.slice(4).filter(price => {
-            //console.log();
-           if (delete cartPrices[-1]) {
-             console.log(cartPrices.length[-1]);
-             //cartPrices.slice(4).splice(price, 1);
-              cartPrice.remove();
-           }
-          })
-
-        //cartPrice.remove();
-         // }
-        //console.log(cartProductImage.src, product.images);
-/*const pCartPrice = document.querySelector('.p-cartPrice')
-        if (pCartPrice.textContent === cartPrices) {
-          const matchedIndex = cartPrices
-            .slice(4)
-            .indexOf(pCartPrice.textContent);
-          if (matchedIndex > -1) {
-            return cartPrices.slice(4).slice(matchedIndex, 1);
-          }
-        }*/
+      /*let currentCount = 1;
+      cartCount.textContent = currentCount++;*/
+      this.products.filter(product => productName.textContent === product.name)
+      .map(product => {
+        console.log(product);
+        //cart Image
+        const cartProductImage = document.createElement('image');
+        cartProduct.appendChild(cartProductImage);
+        cartProductImage.innerHTML = `<img class="cart-image" src=${product.images}>`;
+        //cart Price
+        const cartPriceDiv = document.querySelector('.cart-price');
+        const cartPrice = document.createElement("p");        
+        cartPriceDiv.appendChild(cartPrice);
+        cartPrice.innerHTML = `<p>${product.price}</p>`;
+        cartPrices.push(product.price);
+        const total = cartPrices.reduce((sum, product) => (sum += product), 0);
+        const sum = document.querySelector(".total");
+        sum.textContent = `Total: ${total} DKK`;
         console.log(cartPrices);
-      }); 
-        }
-      });                 
-    });    
+        //cart Quantity
+        /*const cartQty = document.querySelector('.cart-quantity');
+        const cartQuantity = document.createElement('input');
+        cartQty.appendChild(cartQuantity);
+        cartQuantity.innerHTML = `<input class="quantity" type="number">`; 
+        cartQuantity.value = 1;
+        cartQuantity.min = 0;
+        cartQuantity.max = 20;
+        cartQuantity.type = 'number';
+        cartQuantity.placeholder = 'Quantity';
+        //eventlistener to quantity
+        cartQuantity.addEventListener('input', () => {
+          if (cartQuantity.value) {
+            const qtyPrice =  (cartQuantity.value ) * (cartPrice.textContent);
+            sum.textContent ='Total: ' + (total + qtyPrice) + ' DKK';*/
+            /*const qtyCount = Number(currentCount) + Number(cartQuantity.value)-1;
+            cartCount.textContent = qtyCount;*/
+         /* }else if(total !== 0){
+            sum.textContent = "Total: " + Number(total) + (cartQuantity.value * cartPrice.textContent) + ' DKK';
+          }*/
+
+        //});
+        //cart Delete Product
+        const deleteBtn = document.querySelector('.delete-btn');
+        const dbtn = document.createElement("button");
+        deleteBtn.appendChild(dbtn);
+        dbtn.innerHTML = `<button class="btn btn-danger">Delete</button><br>`;
+        dbtn.addEventListener('click', () => {
+          cartPrice.remove();
+          cartProductImage.remove();
+          dbtn.remove();
+          //cartQuantity.remove();
+          const index = cartPrices.indexOf(product.price);
+          if (index > -1) {
+            cartPrices.splice(index, 1);
+            const total = cartPrices.reduce((sum, product) => (sum += product), 0);
+            const sum = document.querySelector(".total");
+            sum.textContent = `Total: ${total} DKK`;
+          }          
+        });           
+      });
+    });        
   }
   /* <li><button type="button" class="btn btn-warning" id="${product.id}">${product.name+"Shop Now"}</button></li>
    <li><p class="sampleid">${product.name}</p></li>*/
@@ -265,8 +269,8 @@ function createButton(text, parent, name){
   });
 }
 // mens all products
-const nikeProduct = new Product("Nike", 150, 1, [], [], "images/mens1.jpg", []);
-const sneakerProduct = new Product("Sneaker", 270, 2, [], [], "images/mens2.jpg", []);
+const nikeProduct = new Product("Nike", 100, 1, [], [], "images/mens1.jpg", []);
+const sneakerProduct = new Product("Sneaker", 200, 2, [], [], "images/mens2.jpg", []);
 const trekkingShoesProduct = new Product("Trekking Shoes", 300, 3, [], [], "images/mens3.jpg", [],'images/default-image.jpg' );
 const winterShoesProduct = new Product("Winter Shoes", 4500, 4, [], [], "images/mens4.jpg", []);
 // Each product Colors
@@ -294,6 +298,7 @@ nikeProduct.addImages("images/mens1-b.jpg");
 sneakerProduct.addImages("images/mens2-a.jpg");
 sneakerProduct.addImages("images/mens2-b.jpg");
 trekkingShoesProduct.addImages("images/mens3-a.jpg");
+trekkingShoesProduct.addImages("images/mens3-b.jpg");
 winterShoesProduct.addImages("images/mens4-a.jpg");
 winterShoesProduct.addImages("images/mens4-b.jpg");
 // store products in array
@@ -304,13 +309,12 @@ displayProducts.renderCart();
 shoppingCart.searchProduct();
 
 // Event listener functionality to close Modal Popup
-document.querySelector(".close").addEventListener("click", () => {
-  document.querySelector(".bg-modal").style.display = "none";
-  document.querySelector(".map-modal").style.display = "none";
-  //location.reload();
-});
-
-document.querySelector(".close-two").addEventListener("click", () => {
-  document.querySelector(".bg-modal-two").style.display = "none";
-});
-//<img onerror='this.src="broken_image.png"' src="default-image.jpg"/>
+document.querySelector(".map-modal").style.display = "none";
+function closeButton(e1, e2){
+  document.querySelector(e1).addEventListener('click', () =>{
+    document.querySelector(e2).style.display = "none";
+  });
+}
+closeButton(".close", ".bg-modal");
+closeButton(".close-two", ".bg-modal-two");
+closeButton(".close-map", ".map-modal");
