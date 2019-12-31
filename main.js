@@ -2,17 +2,6 @@
 const h1 = document.querySelector('.title');
 h1.textContent = 'SV Shoes';
 //render google map for store location
-/*const getLocation = () => {
-    if(navigator.geolocation){
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } else {
-        pStatus.textContent = "Geolocation is not supported by this browser.";
-    }
-}
-function showPosition(position){
-    const lat = position.coords.latitude;
-    const lng = position.coords.longitude;*/
-//}
 function renderLocationOnGoogleMap(lat, lng) {
   const location = document.querySelector(".fa-map-marker-alt");
   const mapDiv = document.getElementById("map");
@@ -32,15 +21,9 @@ function renderLocationOnGoogleMap(lat, lng) {
       text: "SV Shoes"
     }
   });
-  console.log(map);
-  console.log(marker);
 });
 }
-//getLocation();
 renderLocationOnGoogleMap(55.654307800000005, 12.271277699999999);
-
-
-
 // create navigation links
 const mensLi =  document.querySelector('.mens');
 mensLi.innerHTML = `<a href= "#">Mens Shoes</a>`;
@@ -110,18 +93,8 @@ class ShoppingCart {
     const removeProduct = this.products.splice(productIndex, 1);
     return removeProduct;
   }
-
-  getTotal() {
-    const total = this.products.reduce(
-      (sum, product) => (sum += product.price),
-      0
-    );
-    const sum = document.querySelector(".total");
-    sum.textContent = `TOTAL ${total}`;
-    console.log(total);
-  }
   renderSingleProduct(name) {
-    this.products
+    this.products    
       .filter(product => name === product.name)
       .map(product => {
         bigImg.src = `${product.images}`;
@@ -143,7 +116,7 @@ class ShoppingCart {
         // Dropdown list to select shoe color
         product.color.forEach(clr => {
           const color = document.createElement("option");
-          color.innerHTML = `<option value="${clr}">${clr}</option>`;
+          color.innerHTML = `<option class="clr-product" value="${clr}">${clr}</option>`;
           colorsList.appendChild(color);
         });             
         // Dropdown list to select shoe size
@@ -186,15 +159,19 @@ class DisplayProducts {
   }
   renderCart() {
     let cartPrices = [];
-    //this.products.map(product => cartPrices.push(product.price));    
+    //this.products.map(product => cartPrices.push(product.price));       
     const addtoCartBtn = document.querySelector(".btn-primary");
     const cartProduct = document.querySelector(".cart-product");
     //eventlistener to Add to cart button
     addtoCartBtn.addEventListener("click", () => {
       document.querySelector(".bg-modal-two").style.display = "flex";
       document.querySelector(".bg-modal").style.display = "none";
-      /*let currentCount = 1;
-      cartCount.textContent = currentCount++;*/
+      //cart count 
+      let currentCount = 1;
+      cartCount.textContent = currentCount++;    
+      //to clear list of colors and sizes  
+      colorsList.textContent = ""; 
+      sizeList.textContent = "";
       this.products.filter(product => productName.textContent === product.name)
       .map(product => {
         console.log(product);
@@ -242,7 +219,7 @@ class DisplayProducts {
         dbtn.addEventListener('click', () => {
           cartPrice.remove();
           cartProductImage.remove();
-          dbtn.remove();
+          dbtn.remove();          
           //cartQuantity.remove();
           const index = cartPrices.indexOf(product.price);
           if (index > -1) {
@@ -254,10 +231,8 @@ class DisplayProducts {
         });           
       });
     });        
-  }
-  /* <li><button type="button" class="btn btn-warning" id="${product.id}">${product.name+"Shop Now"}</button></li>
-   <li><p class="sampleid">${product.name}</p></li>*/
-}
+  }  
+} // End class of display products
 function createButton(text, parent, name){
   const myBtn = document.createElement('button');
   myBtn.innerHTML = `<button type="button" class="btn btn-warning">${text}</button>`;
@@ -307,12 +282,13 @@ const displayProducts = new DisplayProducts([nikeProduct, sneakerProduct, trekki
 displayProducts.renderDisplayProducts();
 displayProducts.renderCart();
 shoppingCart.searchProduct();
-
 // Event listener functionality to close Modal Popup
 document.querySelector(".map-modal").style.display = "none";
 function closeButton(e1, e2){
   document.querySelector(e1).addEventListener('click', () =>{
     document.querySelector(e2).style.display = "none";
+    colorsList.textContent = "";
+    sizeList.textContent = "";
   });
 }
 closeButton(".close", ".bg-modal");

@@ -7,7 +7,6 @@ header{
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    /*position: fixed;*/
     width: 100%;
     flex: 2 1 200px;
 }
@@ -17,7 +16,6 @@ header{
     font-family: 'Monoton', cursive;
     color: rgb(241, 4, 52);    
     word-spacing: 10px;
-    /*position: fixed;*/
 }
 .container{
     width: 40%;
@@ -28,7 +26,6 @@ header{
     text-align: right;
     margin: 1% 0; 
     color: rgb(253, 77, 112);  
-    /*position: fixed; */
 }
 .search, .search-btn{
     border-radius: 8px;
@@ -41,6 +38,9 @@ header{
     height: 90%;
     margin: 30px 0 0 50px;
     text-align: center;
+}
+.fa-map-marker-alt{
+    cursor: pointer;
 }
                   /************* Style Navigation **************/
 nav{
@@ -84,15 +84,10 @@ h2, footer{
     padding-top: 5%;
 }
 .mens-container, footer{
-    background-color: rgba(0, 0, 0, 0.5);    
-    /*display: flex;
-    justify-content: space-around;*/
+    background-color: rgba(0, 0, 0, 0.5);   
 }
-.mens-display-products{
-   /* width: 30%;
-    flex-direction: column*/
+.mens-display-products{   
     display: flex;
-    ;
     justify-content: space-around;
     flex: 2 1 200px;
     margin-top: 60px;
@@ -110,9 +105,7 @@ h2, footer{
 .mens-display-buttons{
     margin-top: 30px;
     display: flex;
-    justify-content: space-around;
-    /*flex-direction: column;
-    width: 30%;*/
+    justify-content: space-around;    
 }
 button{
     background-color:transparent;
@@ -351,6 +344,30 @@ button{
         margin: 160px 0 0 22%;
         width: 40%;
     }
+    .cart-product, .cart-price, .delete-btn{
+    margin: 0;
+    padding: 0;
+    width: 10px;        
+    }
+    .cart-item{
+        width: 90%;
+        margin: 50px 0 0 0;
+        padding: 0;        
+    }
+    .cart-image{
+        width: 50px;
+        height: 50px;
+        margin: 0;
+    }
+    .btn-success{
+        margin: 1rem 5.5rem 0.5rem 1px;
+    }
+    #map{
+        margin: 4rem 0 5px 15px;
+    }
+    .cart-count{
+        margin-left: 6rem;
+    }
 }
 @media screen and (min-width:600px) and (max-width:1350px) {
     .mens-display-products, .mens-display-buttons{
@@ -376,5 +393,7 @@ button{
         margin: 220px 0 0 30%;
         width: 40%;
     }
-       
+    .product-info{
+        margin-left: 35rem;
+    }       
 }
