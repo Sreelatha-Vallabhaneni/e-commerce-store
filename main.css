@@ -361,9 +361,6 @@ h5{
         padding: 0;
         width: 30px;        
     }
-    .delete-btn{
-        width: 60px;
-    }
     .cart-item{
         width: 90%;
         margin: 50px 0 0 0;
@@ -413,8 +410,12 @@ h5{
     .modal-content{
         height: 80%;
     }
-    .product-info, .btn-primary{
+    .product-info{
         margin: 220px 0 0 30%;
+        width: 40%;
+    }
+    .btn-primary{
+        margin: 200px 0 0 30%;
         width: 40%;
     }
     .product-info{
@@ -422,5 +423,8 @@ h5{
     }
     .disp-images{
         margin: 0 1rem 0 1rem;
-    }       
+    }  
+    .delete-btn{
+        width: 60px;
+    }     
 }
