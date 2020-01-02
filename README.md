@@ -1,6 +1,5 @@
 # e-commerce-store
-SV Shoes is a small e-commerce store for selling shoes
-At present only Mens shoes are available, The kids and Women Shoes will be arriving soon.
+SV Shoes is a small e-commerce store for selling shoes, at present only Mens shoes are available, The kids and Women Shoes will be arriving soon.
 
 # How it works: Project Steps
 1. Click on "Mens Shoes" at navigation bar it will take the user to Mens products list.
@@ -12,7 +11,7 @@ At present only Mens shoes are available, The kids and Women Shoes will be arriv
 7. User can add the same product multiple times before check out and can view the number of products added to cart on cart icon.
 8. Click on the cart icon it will open cart page.
 9. Click on the Location icon and it will display shop location on the google map.
-10. The user can search for the product using the search bar,fx: enter " Nike " in the search bar and click on the search button it will display the product.
+10. The user can search for the product using the search bar, fx: enter nike in the search bar and click on the search button it will display the product.
 11. This application is responsive for all devices.
 
 
