@@ -130,7 +130,7 @@ button{
     margin: 10px -10px 10px 0 ;  
 }
 /**************Style the Modal Box/POPUP **************/
-.map-modal, .bg-modal, .bg-modal-two{
+.map-modal, .bg-modal, .bg-modal-two, .bg-modal-three{
     width:100%;
     height: 100%;
     background-color:rgba(0, 0, 0, 0.7);
@@ -143,7 +143,21 @@ button{
     align-items: center;
     display: none;     /* Hidden by default */
 }
-.map-content, .modal-content, .modal-content-two{
+.bg-modal-three, .modal-content-three{
+    margin: 1rem 8rem;
+    width: 80%;
+    height: 20%;
+    text-align: center;
+    border-radius: 8px;
+    overflow: visible;
+}
+h5{
+    color: darkblue;
+    text-align: center;
+    font-size: medium;
+    margin-top: 1rem;;
+}
+.map-content, .modal-content, .modal-content-two, .modal-content-three{
     width: 80%;
     height: 80%;
     overflow: scroll;
@@ -252,11 +266,6 @@ button{
 .cart-product{
     margin-top: 21px;
 }
-/*.cart-quantity input{
-    width: 50%;
-    text-align: center;
-    margin-left: 5rem;
-}*/
 .cart-item{   
     margin: 10px; 
     display: flex;
@@ -280,6 +289,9 @@ button{
 .copyright{
     background-color:rgba(0, 0, 0, 0.7);
     font-size: small;
+}
+.fa-cart-arrow-down{
+    cursor: pointer;
 }
 /***************** Responsive/ media querries *****************/
 @media screen and (min-width:200px) and (max-width:1100px) {
@@ -345,9 +357,9 @@ button{
         width: 40%;
     }
     .cart-product, .cart-price, .delete-btn{
-    margin: 0;
-    padding: 0;
-    width: 10px;        
+        margin: 0;
+        padding: 0;
+        width: 30px;        
     }
     .delete-btn{
         width: 30px;
@@ -371,12 +383,21 @@ button{
     .cart-count{
         margin-left: 6rem;
     }
+    .bg-modal-three{
+        margin: 0 0 0 30px;
+    }
+    .modal-content-three{
+        margin: 0;
+    }
 }
 @media screen and (min-width:600px) and (max-width:1350px) {
     .mens-display-products, .mens-display-buttons{
         display:flex;
         flex-direction: row;
         width: 90%;      
+    }
+    .bg-modal-three{
+        margin-left: 4rem;
     }
     .mens-display-buttons{
         margin-left: 40px;   
@@ -400,6 +421,6 @@ button{
         margin-left: 35rem;
     }
     .disp-images{
-        margin-left: 5rem;
+        margin: 0 1rem 0 1rem;
     }       
 }

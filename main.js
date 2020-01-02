@@ -26,7 +26,7 @@ function renderLocationOnGoogleMap(lat, lng) {
 renderLocationOnGoogleMap(55.654307800000005, 12.271277699999999);
 // create navigation links
 const mensLi =  document.querySelector('.mens');
-mensLi.innerHTML = `<a href= "#">Mens Shoes</a>`;
+mensLi.innerHTML = `<a href= "#nav-mens">Mens Shoes</a>`;
 const womensLi = document.querySelector('.womens');
 womensLi.innerHTML = `<a href= "#">Womens Shoes</a>`;
 const kidsLi = document.querySelector('.kids');
@@ -57,6 +57,10 @@ const search = document.querySelector('.search');
 const searchBtn = document.querySelector('.search-btn');
 const searchModal =document.querySelector('.search-modal');
 const searchMContent = document.querySelector(".search-m-content");
+//cart 
+const checkOut = document.querySelector('.btn-success');
+const checkOutModal = document.querySelector('.bg-modal-three');
+const shpCart = document.querySelector(".fa-cart-arrow-down");
 // Create class for Product
 class Product{
     constructor(name, price, id, color = [], size = [], image, subImages = [], defaultImage){
@@ -139,7 +143,6 @@ class ShoppingCart {
       });
   }
 }
-
 // Create class for Display Products
 class DisplayProducts {
   constructor(products) {
@@ -158,23 +161,22 @@ class DisplayProducts {
     createButton("Shop WinterShoes", mensDisButtons, "Winter Shoes");
   }
   renderCart() {
-    let cartPrices = [];
-    //this.products.map(product => cartPrices.push(product.price));       
+    let cartPrices = [];       
     const addtoCartBtn = document.querySelector(".btn-primary");
     const cartProduct = document.querySelector(".cart-product");
     //eventlistener to Add to cart button
+    let currentCount = 0;
     addtoCartBtn.addEventListener("click", () => {
       document.querySelector(".bg-modal-two").style.display = "flex";
-      document.querySelector(".bg-modal").style.display = "none";
-      //cart count 
-      let currentCount = 1;
-      cartCount.textContent = currentCount++;    
+      document.querySelector(".bg-modal").style.display = "none";        
       //to clear list of colors and sizes  
       colorsList.textContent = ""; 
       sizeList.textContent = "";
+      //cart count     
+      cartCount.textContent = (currentCount = currentCount + 1);
       this.products.filter(product => productName.textContent === product.name)
       .map(product => {
-        console.log(product);
+        console.log(product);       
         //cart Image
         const cartProductImage = document.createElement('image');
         cartProduct.appendChild(cartProductImage);
@@ -187,36 +189,16 @@ class DisplayProducts {
         cartPrices.push(product.price);
         const total = cartPrices.reduce((sum, product) => (sum += product), 0);
         const sum = document.querySelector(".total");
-        sum.textContent = `Total: ${total} DKK`;
-        console.log(cartPrices);
-        //cart Quantity
-        /*const cartQty = document.querySelector('.cart-quantity');
-        const cartQuantity = document.createElement('input');
-        cartQty.appendChild(cartQuantity);
-        cartQuantity.innerHTML = `<input class="quantity" type="number">`; 
-        cartQuantity.value = 1;
-        cartQuantity.min = 0;
-        cartQuantity.max = 20;
-        cartQuantity.type = 'number';
-        cartQuantity.placeholder = 'Quantity';
-        //eventlistener to quantity
-        cartQuantity.addEventListener('input', () => {
-          if (cartQuantity.value) {
-            const qtyPrice =  (cartQuantity.value ) * (cartPrice.textContent);
-            sum.textContent ='Total: ' + (total + qtyPrice) + ' DKK';*/
-            /*const qtyCount = Number(currentCount) + Number(cartQuantity.value)-1;
-            cartCount.textContent = qtyCount;*/
-         /* }else if(total !== 0){
-            sum.textContent = "Total: " + Number(total) + (cartQuantity.value * cartPrice.textContent) + ' DKK';
-          }*/
-
-        //});
+        sum.textContent = `Total: ${total} DKK`;        
         //cart Delete Product
         const deleteBtn = document.querySelector('.delete-btn');
         const dbtn = document.createElement("button");
         deleteBtn.appendChild(dbtn);
         dbtn.innerHTML = `<button class="btn btn-danger">Delete</button><br>`;
         dbtn.addEventListener('click', () => {
+          //decreasing cart count
+          cartCount.textContent = currentCount = currentCount - 1;
+          //remove product
           cartPrice.remove();
           cartProductImage.remove();
           dbtn.remove();          
@@ -282,6 +264,19 @@ const displayProducts = new DisplayProducts([nikeProduct, sneakerProduct, trekki
 displayProducts.renderDisplayProducts();
 displayProducts.renderCart();
 shoppingCart.searchProduct();
+//event listener to Cart icon
+shpCart.addEventListener("click", () => {
+  document.querySelector(".bg-modal-two").style.display = "flex";
+});
+//checkout functionality
+checkOut.addEventListener('click', () => {
+  checkOutModal.style.display = "flex";
+  document.querySelector("h5");  
+  document.querySelector(".bg-modal-two").style.display = "none";
+  setTimeout(() => {
+    checkOutModal.style.display = "none";
+  }, 8000);  
+})
 // Event listener functionality to close Modal Popup
 document.querySelector(".map-modal").style.display = "none";
 function closeButton(e1, e2){

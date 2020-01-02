@@ -24,7 +24,7 @@
                 <input type="text" class="search" placeholder="Search Product">                
                 <button class="search-btn" type="submit"><i class="fas fa-search"></i></button>                
             </div>
-            <a href=""><i class="fas fa-cart-arrow-down fa-2x"></i></a>
+            <i class="fas fa-cart-arrow-down shp-cart fa-2x"></i>
             <p class="cart-count"></p>
             <i class="fas fa-map-marker-alt fa-2x"></i>
         </div> 
@@ -39,7 +39,7 @@
     <nav>
         <b>
            <ul class="nav-links">
-               <li class="mens nav-list"><a href="#mensShoes"></a></li>
+               <li class="mens nav-list"></li>
                <li class="womens nav-list"></li>
                <li class="kids nav-list"></li>
            </ul>
@@ -72,8 +72,8 @@
     <!-- creating Mens Shoes section -->
     <section class="mens">
         <div class="mens-container">
-            <h2 class="mens-shoes"></h2>
-            <div class="mens-display-products" id="mensShoes"></div>
+            <h2 class="mens-shoes" id="nav-mens"></h2>
+            <div class="mens-display-products"></div>
             <div class="mens-display-buttons"></div>            
         </div>
         <footer>
@@ -114,10 +114,14 @@
             <hr>
             <div class="cart-item">                
                 <div class="cart-product"><u><b>Product Image</b></u></div>
-                <div class="cart-price"> <u><b>Price in DKK</b></u></div>
-               <!--<div class="cart-quantity"><u><b>Quantity</b></u></div>-->
-                <div class="delete-btn"><u><b>Remove Product</b></u></div>                                               
+                <div class="cart-price"> <u><b>Price in DKK</b></u></div>               
+                <div class="delete-btn"><u><b>Remove Product</b></u></div>                                        
             </div>             
+        </div>
+    </div>
+    <div class="bg-modal-three">
+        <div class="modal-content-three">
+            <h5>Thanks for purchasing!<br> You will recieve your order soon<br> Please visit again 🙂</h5>
         </div>
     </div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDSItJ9Xr0x3pjqEWfbcpYy6Y9eVtwTaHg"></script>
