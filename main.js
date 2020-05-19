@@ -2,28 +2,31 @@
 const h1 = document.querySelector('.title');
 h1.textContent = 'SV Shoes';
 //render google map for store location
+
 function renderLocationOnGoogleMap(lat, lng) {
-  const location = document.querySelector(".fa-map-marker-alt");
+   const location = document.querySelector(".fa-map-marker-alt");
   const mapDiv = document.getElementById("map");
-  location.addEventListener('click', () => {
+   location.addEventListener('click', () => {
     document.querySelector(".map-modal").style.display = "flex";
-  const map = new google.maps.Map(mapDiv, {
-    center: { lat, lng },
-    zoom: 10
-  });
- const marker = new google.maps.Marker({
-    position: { lat, lng },
-    map: map,
-    label: {
-      color: "darkblue",
-      fontWeight: "bold",
-      fontSize: "24px",
-      text: "SV Shoes"
-    }
-  });
-});
+//   const map = new google.maps.Map(mapDiv, {
+//     center: { lat, lng },
+//     zoom: 10
+//   });
+//  const marker = new google.maps.Marker({
+//     position: { lat, lng },
+//     map: map,
+//     label: {
+//       color: "darkblue",
+//       fontWeight: "bold",
+//       fontSize: "24px",
+//       text: "SV Shoes"
+//     }
+//   });
+mapDiv.innerHTML = `<div class="mapouter"><div class="gmap_canvas"><iframe width="1000" height="450" id="gmap_canvas" src="https://maps.google.com/maps?q=taastrup&t=&z=13&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></div>`;
+ });
 }
-renderLocationOnGoogleMap(55.654307800000005, 12.271277699999999);
+ renderLocationOnGoogleMap();
+
 // create navigation links
 const mensLi =  document.querySelector('.mens');
 mensLi.innerHTML = `<a href= "#nav-mens">Mens Shoes</a>`;
